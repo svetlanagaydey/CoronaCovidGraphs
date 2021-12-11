@@ -71,7 +71,7 @@ body{
     left: 10%;
     width: 20px;
     height: 20px;
-    background-image: url(../images/korona20.png);
+    background-image: url(../images/korona10.png);
     animation-delay: 2s;
     animation-duration: 12s;
 }
@@ -97,7 +97,7 @@ body{
     left: 65%;
     width: 20px;
     height: 20px;
-    background-image: url(../images/korona20.png);
+    background-image: url(../images/korona10.png);
     animation-delay: 0s;
 }
 

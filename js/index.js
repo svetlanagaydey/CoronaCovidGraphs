@@ -30,6 +30,14 @@ const regions = {
 		critical: 0,
 	},
 };
+
+const currentCountry = {
+	deaths: 0,
+	confirmed: 0,
+	recovered: 0,
+	critical: 0,
+};
+const searchCountries = [];
 const btnWorld = document.querySelector(".btnWorld");
 const btnAsia = document.querySelector(".btnAsia");
 const btnAfrica = document.querySelector(".btnAfrica");
@@ -48,14 +56,13 @@ const generateChart = (resData) => {
 			labels: ["Deaths", "Confirmed", "Recovered", "Critical"],
 			datasets: [
 				{
-					label: ["4 of Cases"],
+					label: ["cases"],
 					data: data,
 					backgroundColor: [
 						"white",
 						"#b6baf7",
 						"#2f3379",
 						" #4e54c8",
-						"rgba(153, 102, 255, 1)",
 					],
 					borderColor: "white",
 					borderWidth: 1,
@@ -143,3 +150,73 @@ window.addEventListener("load", () => {
 		console.error(err);
 	});
 });
+
+const searchBar = document.querySelector(".search-input");
+const chartType = document.querySelector("#chart-type");
+let timerId;
+const resultContainer = document.querySelector(".results-container");
+const changeData = (e) => {
+	const country = searchCountries.find((country) => {
+		return country.name === e.target.innerText;
+	});
+	searchBar.value = e.target.innerText;
+	resultContainer.innerHTML = "";
+	resultContainer.classList.remove("border-class");
+	generateChart(country.latest_data, myChart.config._config.type);
+	buttonsList.forEach((btn) => {
+		btn.id = "";
+	});
+};
+const populateArray = async () => {
+	const baseURLCovid = "https://corona-api.com/countries";
+	const countries = await axios.get(baseURLCovid);
+	countries.data.data.forEach((country) => {
+		searchCountries.push(country);
+	});
+};
+populateArray();
+// chartType.addEventListener("change", () => {
+// 	const data = {
+// 		deaths: myChart.data.datasets[0].data[0],
+// 		confirmed: myChart.data.datasets[0].data[1],
+// 		recovered: myChart.data.datasets[0].data[2],
+// 		critical: myChart.data.datasets[0].data[3],
+// 	};
+// 	generateChart(data, chartType.value);
+// });
+
+const search = (e) => {
+	resultContainer.innerHTML = "";
+	resultContainer.classList.remove("border-class");
+
+	const filteredCountries = searchCountries.filter((inStr) => {
+		return inStr.name.toLowerCase().includes(searchBar.value.toLowerCase());
+	});
+	clearTimeout(timerId);
+	if (e.target.value !== "")
+		timerId = setTimeout(() => {
+			displayResults(filteredCountries);
+		}, 1000);
+};
+const displayResults = (countriesList) => {
+	countriesList.forEach((country) => {
+		const button = document.createElement("button");
+		button.type = "button";
+		button.innerText = country.name;
+		resultContainer.append(button);
+		button.addEventListener("click", changeData);
+	});
+	resultContainer.classList.add("border-class");
+	if (countriesList.length === 0) {
+		resultContainer.innerText = "Sorry couldn't find any countries with this name,please try again";
+	}
+};
+searchBar.addEventListener("input", search);
+searchBar.addEventListener("focusout", () => {
+	setTimeout(() => {
+		resultContainer.innerHTML = "";
+		resultContainer.classList.remove("border-class");
+	}, 500);
+});
+searchBar.addEventListener("focus", search);
+

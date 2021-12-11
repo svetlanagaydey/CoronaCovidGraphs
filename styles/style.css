@@ -13,6 +13,10 @@ body {
 .btnContainer {
     margin-top: 4vh;
 }
+.search-input::-webkit-input-placeholder {
+    color: #8f94fb;
+}
+
 .btnContainer button {
     padding: 5px 15px;
     box-sizing: border-box;
@@ -39,8 +43,14 @@ body {
 .btnContainer button:hover {
     background-color: #4e54c8;
     color: white;
-      box-shadow: 0 0 10px 0 white inset, 0 0 10px 4px white;
+    box-shadow: 0 0 10px 0 white inset, 0 0 10px 4px white;
+    overflow: hidden;
   }
+.search-input:hover, 
+.search-input:focus {
+    box-shadow: 0 0 10px 0 white inset, 0 0 10px 4px white;
+
+}
 .container{
    padding-top: 2%;
    display: flex;
@@ -53,4 +63,50 @@ body {
     opacity: 100%;
     width: 30%;
     margin-top: 2vh;
+}
+.search-input {
+    height: 5vh;
+    width: 50vw;
+    color: #4e54c8;
+    padding: 0 2vw;
+    font-size: 2.5vmin;
+}
+.results-container {
+    padding: 5px 10px;
+    width: 50%;
+}
+.search-input,
+.search-input:focus,
+.search-input:hover {
+    border-radius: 5px;
+    outline: none;
+}
+@media (max-width: 375px) {
+    
+    .title-background {
+        width: 95%;
+        height: 5vh;
+    }
+    .btnContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 90%;
+    }
+    
+    .btnContainer .btnWorld {
+        width: 950%;
+    }
+    .btnContainer button {
+        display: inline;
+        font-size: 1.5rem;
+        width: 44%;
+        text-align: center;
+        margin: 5px;
+    }
+    .chart-container {
+        width: 90%;
+    }
 }
