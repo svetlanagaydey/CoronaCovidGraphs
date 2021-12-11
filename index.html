@@ -1,12 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoronaCovidGraph</title>
-    <link rel="stylesheet" href="styles/style.css">
-</head>
-<body>
-    <script src="js/index.js"></script>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>COVID-19</title>
+		
+		
+		<link rel="stylesheet" href="styles/style.css"/>
+		<link rel="stylesheet" href="styles/backgroundAnimation.css">
+	</head>
+
+	<body>
+		
+		<div class="container" >
+			<div class="title-background">
+				<div class="context">
+					<h1>CODIV-19 World Tracker</h1>
+				</div>
+			
+				<div class="area" >
+					<ul class="circles">
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="btnContainer">
+				<button class="btnWorld" type="button">WORLD</button>
+				<button class="btnAsia" type="button">Asia</button>
+				<button class="btnAfrica" type="button">Africa</button>
+				<button class="btnAmerica" type="button">America</button>
+				<button class="btnEurope" type="button">Europe</button>
+			</div>
+
+			<div class="chart-container">
+				<canvas id="myChart" width="100" height="100"></canvas>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script src="js/index.js"></script>
+	</body>
 </html>
